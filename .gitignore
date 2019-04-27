@@ -1,0 +1,13 @@
+*.h5
+*.hdf5
+*.gv
+NN_model/
+__pycache__/
+results/
+*.pdf
+*.png
+.ipynb_checkpoints/
+*.npy
+*.csv
+/submisssions
+/models
