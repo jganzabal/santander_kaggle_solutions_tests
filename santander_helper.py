@@ -2,10 +2,11 @@ import tensorflow as tf
 from sklearn.metrics import roc_auc_score
 import keras
 import numpy as np
+tf.logging.set_verbosity(tf.logging.ERROR)
 
 def auc(y_true, y_pred):
     f1 = lambda: tf.constant(0.5, dtype=tf.float64)
-    f2 = lambda: tf.py_func(roc_auc_score, (y_true, y_pred), tf.double)
+    f2 = lambda: tf.py_function(roc_auc_score, (y_true, y_pred), tf.double)
     
     r = tf.case([(tf.equal(tf.reduce_sum(y_true), tf.constant(0.5, dtype=tf.float32)), f1),
                  (tf.equal(tf.reduce_sum(tf.subtract(tf.ones_like(y_true), y_true)), tf.constant(0.5, dtype=tf.float32)), f1)
